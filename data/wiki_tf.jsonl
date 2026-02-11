@@ -1,0 +1,10 @@
+{"id":"1","article":"https://en.wikipedia.org/wiki/Alan_Turing","statement":"Alan Turing was born on 23 June 1912.","label":"true"}
+{"id":"2","article":"https://en.wikipedia.org/wiki/Alan_Turing","statement":"Alan Turing was born on 23 June 1922.","label":"false"}
+{"id":"3","article":"https://en.wikipedia.org/wiki/Chinese_room","statement":"John Searle presented the Chinese room argument in a 1980 paper titled \"Minds, Brains, and Programs\" published in Behavioral and Brain Sciences.","label":"true"}
+{"id":"4","article":"https://en.wikipedia.org/wiki/Chinese_room","statement":"The Chinese room argument concludes that a computer executing a program can have understanding regardless of how the program works.","label":"false"}
+{"id":"5","article":"https://en.wikipedia.org/wiki/Visual_snow_syndrome","statement":"Visual snow syndrome is described as an uncommon neurological condition.","label":"true"}
+{"id":"6","article":"https://en.wikipedia.org/wiki/Visual_snow_syndrome","statement":"Visual snow syndrome is described as a common neurological condition.","label":"false"}
+{"id":"7","article":"https://en.wikipedia.org/wiki/Year_2000_problem","statement":"The year 2000 problem was largely caused by many programs storing years using only the final two digits.","label":"true"}
+{"id":"8","article":"https://en.wikipedia.org/wiki/Year_2000_problem","statement":"The year 2000 problem was largely caused by many programs storing years using only the final three digits.","label":"false"}
+{"id":"9","article":"https://en.wikipedia.org/wiki/Taoism","statement":"The Tao Te Ching is described as having been composed between the 4th and 6th century BCE.","label":"true"}
+{"id":"10","article":"https://en.wikipedia.org/wiki/The_Emperor%27s_New_Mind","statement":"The Emperor's New Mind was released on November 9, 1999.","label":"false"}
