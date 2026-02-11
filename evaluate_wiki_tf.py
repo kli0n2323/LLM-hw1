@@ -69,7 +69,13 @@ for i in range(len(wiki_facts)):
     print(f"Model Response {i}: {response}")
     print(f"Ground Truth {i}: {answer}")
 
-for i in incorrect_responses:
+mismatch_list = []
+
+for i in range(len(incorrect_responses)):
     mismatch = []
-    mismatch.append(data_full[i][id])
-    print(mismatch)
+    mismatch.append("ID: " + data_full[incorrect_ids[i]]['id'])
+    mismatch.append("Statement: " + data_full[incorrect_ids[i]]['statement'])
+    mismatch.append("Label: " + data_full[incorrect_ids[i]]['label'])
+    mismatch.append("Model response: " + incorrect_responses[i])
+    mismatch_list.append(mismatch)
+print(mismatch_list)
