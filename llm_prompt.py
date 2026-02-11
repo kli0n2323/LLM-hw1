@@ -2,79 +2,73 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import argparse
 import transformers
 
-#  CLI PARSER ---
-
+# ---- CLI PARSER ----
 parser = argparse.ArgumentParser()
+
 parser.add_argument(
     "-m",
     "--model",
-    default = "Qwen/Qwen2.5-1.5B-Instruct",
+    default="Qwen/Qwen2.5-1.5B-Instruct",
     type=str,
-    help ="Set model",
+    help="Hugging Face model name or path",
 )
 parser.add_argument(
     "-p",
     "--prompt",
-    type = str,
-    default = "Introduce yourself!"
+    type=str,
+    required=True,
+    help="Prompt to send to the model",
 )
 parser.add_argument(
     "--max_new_tokens",
-    type = int,
-    default = 128
+    type=int,
+    default=128,
+    help="Maximum number of tokens to generate",
 )
 parser.add_argument(
     "-t",
     "--temperature",
     type=float,
-    default = 0.7
+    default=0.7,
+    help="Sampling temperature (0.0 = deterministic)",
 )
 parser.add_argument(
     "-s",
     "--seed",
     type=int,
-    default = 0
+    default=0,
+    help="Random seed",
 )
+
 args = parser.parse_args()
 
-
-# INIT MODEL / DISPLAY RESPONSE --
-
-model_name = args.model
-seed = args.seed
+# ---- INIT MODEL / DISPLAY RESPONSE ----
+transformers.set_seed(args.seed)
 
 model = AutoModelForCausalLM.from_pretrained(
-    model_name,
+    args.model,
     torch_dtype="auto",
-    device_map="auto"
+    device_map="auto",
 )
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(args.model)
 
-transformers.set_seed(seed)
-
-prompt = args.prompt
 messages = [
-    {"role": "system", "content": "You are an AI assistant made to answer questions. Depending on the prompt, you will either answer with 'Yes' or 'No', or 'True' or 'False'."},
-    {"role": "user", "content": prompt}
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": args.prompt},
 ]
-text = tokenizer.apply_chat_template(
-    messages,
-    tokenize=False,
-    add_generation_prompt=True
-)
+
+text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+do_sample = args.temperature > 0.0
 
 generated_ids = model.generate(
     **model_inputs,
-    max_new_tokens= args.max_new_tokens,
+    max_new_tokens=args.max_new_tokens,
     temperature=args.temperature,
-    do_sample=True
+    do_sample=do_sample,
 )
-generated_ids = [
-    output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
-]
 
+generated_ids = generated_ids[:, model_inputs.input_ids.shape[1]:]
 response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
 print(response)
-
-
