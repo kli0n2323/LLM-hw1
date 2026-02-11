@@ -84,10 +84,10 @@ for i, entry in enumerate(boolq_subset):
             "parsed_pred": pred,
         })
 
-    #print(f"Question Prompt {i}: {prompt}")
-    #print(f"Model Response {i}: {response}")
-    #print(f"Ground Truth {i}: {ground_truth}")
-    #print("")
+    print(f"Question Prompt {i}: {prompt}")
+    print(f"Model Response {i}: {response}")
+    print(f"Ground Truth {i}: {ground_truth}")
+    print("")
 accuracy_score = (correct_count / n) * 100
 
 print("INCORRECT RESPONSES WITH PASSAGES:")
@@ -142,10 +142,10 @@ for i, entry in enumerate(boolq_subset):
             "prediction": pred,
         })
 
-    #print(f"Passage Prompt {i}: {prompt}")
-    #print(f"Model Response {i}: {response}")
-    #print(f"Ground Truth {i}: {ground_truth}")
-    #print("")
+    print(f"Passage Prompt {i}: {prompt}")
+    print(f"Model Response {i}: {response}")
+    print(f"Ground Truth {i}: {ground_truth}")
+    print("")
 
 accuracy_score = (correct_count / n) * 100
 
